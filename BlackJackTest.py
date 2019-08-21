@@ -1,11 +1,14 @@
 import BlackJack
+import unittest
 
-def basic_card_test():
-	card = BlackJack.Card(12, 2)
-	assert card.show() == "The Queen of Hearts", "Output: " + card.show()
+class CardTest(unittest.TestCase):
 
-def tests():
-	basic_card_test()
+	def setUp(self):
+		self.card = BlackJack.Card(8, 3)
+
+	def test_card_is_as_expected(self):
+		self.assertEqual(self.card.show(), "The 8 of Spades")
+
 
 if __name__ == "__main__":
-	tests()
+	unittest.main()
