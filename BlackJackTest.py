@@ -60,6 +60,12 @@ class CardTest(unittest.TestCase):
 		self.assertEqual(self.card2.get_card_value(), 10)
 
 
+class CardCollectionsTest(unittest.TestCase):
+
+	def setUp(self):
+		pass
+
+
 
 
 if __name__ == "__main__":

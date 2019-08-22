@@ -18,19 +18,18 @@ class Card:
 		else:
 			raise CardException(rank, suit)
 
+	def __repr__(self):
+		"""Returns a string of the current card in an easy to read format"""
+		return "{} of {}".format(Card.RANK[self.rank], Card.SUIT[self.suit])
+
 	def get_card_value(self):
 		if self.rank > 10: #jack, queen and king all worth 10
 			return 10
 		else:
 			return self.rank
-	
-
-	def show(self):
-		"""Returns a string of the current card in an easy to read format"""
-		return "{} of {}".format(Card.RANK[self.rank], Card.SUIT[self.suit])
 
 #DEBUG
 if __name__ == "__main__":
 	card = Card(12, 3)
-	print(card.show())
+	print(card)
 	print(card.get_card_value())

@@ -4,8 +4,6 @@ class CardException(Exception):
 		self.rank = rank
 		self.suit = suit
 
-		print("Invalid Card Configurations")
-		print("Given rank: {}".format(self.rank))
-		print("Given suit: {}".format(self.suit))
+		print("Invalid Card Configurations: suit -> {}, rank -> {}".format(self.suit, self.rank))
 
 	
