@@ -1,4 +1,4 @@
-import BlackJack
+import Card
 import unittest
 from UserDefinedExceptions import *
 import logging
@@ -25,11 +25,13 @@ def logger(test):
 class CardTest(unittest.TestCase):
 
 	def setUp(self):
-		self.card = BlackJack.Card(8, 3)
+		self.card = Card.Card(8, 3)
+		self.card2 = Card.Card(13, 2)
 
 	@logger
 	def test_card_is_as_expected(self):
-		self.assertEqual(self.card.show(), "8 odf Spades")
+		self.assertEqual(self.card.show(), "8 of Spades")
+		self.assertEqual(self.card2.show(), "King of Hearts")
 
 	@logger
 	def test_correct_show_format(self):
@@ -40,17 +42,23 @@ class CardTest(unittest.TestCase):
 	@logger
 	def test_suit_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			self.card = BlackJack.Card(4, 4)
+			Card.Card(4, 4)
 
 	@logger
 	def test_rank_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			self.card = BlackJack.Card(2, 2)
+			Card.Card(29, 2)
 
 	@logger
 	def test_rank_and_suit_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			self.card = BlackJack.Card(39, 23)
+			Card.Card(39, 23)
+
+	@logger
+	def test_get_card_value(self):
+		self.assertEqual(self.card.get_card_value(), 8)
+		self.assertEqual(self.card2.get_card_value(), 10)
+
 
 
 
