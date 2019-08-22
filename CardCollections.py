@@ -12,13 +12,17 @@ class CardCollection:
 		return "{}: {}".format(self.label, self.cards)
 
 	def add_card(self, card):
-		self.cards.append(card)
+		if isinstance(card, Card.Card):
+			self.cards.append(card)
 
 	#overloaded method, if no index given removes the last element in the list
 	def remove_card(self, index=None):
 		if index == None:
 			return self.cards.pop(self.get_size() - 1)
-		return self.cards.pop(index)
+		try:
+			return self.cards.pop(index)
+		except(TypeError, IndexError) as error:
+			print("Could not remove card, bad input")
 
 	def get_size(self):
 		return len(self.cards)
@@ -41,6 +45,12 @@ class CardCollection:
 			temp_card = self.remove_card()
 			deal_to_collection.add_card(temp_card)
 
+class Deck(CardCollection):
+	pass
+
+class Hand(CardCollection):
+	pass
+
 
 #DEBUG
 if __name__ == "__main__":
@@ -58,3 +68,4 @@ if __name__ == "__main__":
 	print(draw_pile)
 	draw_pile.deal(hand, 6)
 	print(hand)
+	draw_pile.remove_card(34)

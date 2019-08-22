@@ -30,6 +30,6 @@ class Card:
 
 #DEBUG
 if __name__ == "__main__":
-	card = Card(12, 3)
+	card = Card(8, 3)
 	print(card)
 	print(card.get_card_value())
