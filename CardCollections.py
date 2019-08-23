@@ -1,5 +1,5 @@
 import random
-import Card
+from Card import Card
 
 class CardCollection:
 
@@ -12,7 +12,7 @@ class CardCollection:
 		return "{}: {}".format(self.label, self.cards)
 
 	def add_card(self, card):
-		if isinstance(card, Card.Card):
+		if isinstance(card, Card):
 			self.cards.append(card)
 
 	#overloaded method, if no index given removes the last element in the list
@@ -46,18 +46,34 @@ class CardCollection:
 			deal_to_collection.add_card(temp_card)
 
 class Deck(CardCollection):
-	pass
+
+	def __init__(self, label):
+		super().__init__(label)
+		self.populate()
+
+	def populate(self):
+		for suit in range(4):
+			for rank in range(2, 15):
+				self.add_card(Card(rank, suit))
+	
 
 class Hand(CardCollection):
-	pass
+	
+	def __init__(self, label):
+		super().__init__(label)
+
+	def display(self):
+		print(self.label + ": ")
+		for index in range(self.get_size()):
+			print(self.cards[index])
 
 
 #DEBUG
 if __name__ == "__main__":
 	draw_pile = CardCollection("Draw Pile")
 	hand = CardCollection("Hand")
-	for i in range(2, 14):
-		card = Card.Card(i, 2)
+	for i in range(2, 15):
+		card = Card(i, 2)
 		draw_pile.add_card(card)
 
 
@@ -69,3 +85,14 @@ if __name__ == "__main__":
 	draw_pile.deal(hand, 6)
 	print(hand)
 	draw_pile.remove_card(34)
+	print("\n\n\n\n\n")
+
+	deck = Deck("Deck")
+	print(deck)
+	print(deck.get_size())
+
+	print("\n\n\n\n\n")
+	hand = Hand("Hand")
+	deck.shuffle()
+	deck.deal(hand, 6)
+	hand.display()

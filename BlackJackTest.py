@@ -1,4 +1,4 @@
-import Card
+from Card import Card
 from CardCollections import *
 import unittest
 from UserDefinedExceptions import *
@@ -26,8 +26,8 @@ def logger(test):
 class CardTest(unittest.TestCase):
 
 	def setUp(self):
-		self.card = Card.Card(8, 3)
-		self.card2 = Card.Card(13, 2)
+		self.card = Card(8, 3)
+		self.card2 = Card(13, 2)
 
 	@logger
 	def test_card_is_as_expected(self):
@@ -43,17 +43,17 @@ class CardTest(unittest.TestCase):
 	@logger
 	def test_suit_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			Card.Card(4, 4)
+			Card(4, 4)
 
 	@logger
 	def test_rank_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			Card.Card(29, 2)
+			Card(29, 2)
 
 	@logger
 	def test_rank_and_suit_out_of_bounds_error(self):
 		with self.assertRaises(CardException):
-			Card.Card(39, 23)
+			Card(39, 23)
 
 	@logger
 	def test_get_card_value(self):
@@ -66,18 +66,18 @@ class CardCollectionTest(unittest.TestCase):
 	def setUp(self):
 		self.draw_pile = CardCollection("Draw Pile")
 		for i in range(2, 15):
-			card = Card.Card(i, 2)
+			card = Card(i, 2)
 			self.draw_pile.add_card(card)
 
 	@logger
 	def test_add_card(self):
-		card = Card.Card(12, 1)
+		card = Card(12, 1)
 		self.draw_pile.add_card(card)
 		self.assertEqual(self.draw_pile.cards[-1], card) #check if last card added is last card in deck
 
 	@logger
 	def test_only_accepts_card(self):
-		card = Card.Card(3,2)
+		card = Card(3,2)
 		self.draw_pile.add_card(card)
 		self.draw_pile.add_card(2)
 		self.draw_pile.add_card("Card")
@@ -136,6 +136,29 @@ class CardCollectionTest(unittest.TestCase):
 		three = self.draw_pile.cards[-3]
 		self.draw_pile.deal(hand, 3)
 		self.assertEqual([one, two, three], hand.cards)
+
+class DeckTest(unittest.TestCase):
+
+	def setUp(self):
+		self.deck = Deck("Deck")
+
+	def test_populate(self):
+		self.assertEqual(self.deck.get_size(), 52)
+		for i in range(self.deck.get_size()):
+			for j in range(self.deck.get_size()):
+				if i == j:
+					continue
+				self.assertFalse(str(self.deck.cards[i]) == str(self.deck.cards[j]))
+
+class HandTest(unittest.TestCase):
+	 def setUp(self):
+	 	self.hand = Hand("Hand")
+
+	 def test_display(self):
+	 	deck = Deck("Deck")
+	 	deck.deal(self.hand, 3)
+	 	self.hand.display()
+
 
 
 
