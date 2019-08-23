@@ -65,7 +65,7 @@ class CardCollectionTest(unittest.TestCase):
 
 	def setUp(self):
 		self.draw_pile = CardCollection("Draw Pile")
-		for i in range(2, 14):
+		for i in range(2, 15):
 			card = Card.Card(i, 2)
 			self.draw_pile.add_card(card)
 
@@ -113,7 +113,7 @@ class CardCollectionTest(unittest.TestCase):
 
 	@logger
 	def test_size(self):
-		self.assertEqual(12, self.draw_pile.get_size())
+		self.assertEqual(13, self.draw_pile.get_size())
 
 	@logger
 	def test_is_empty(self):

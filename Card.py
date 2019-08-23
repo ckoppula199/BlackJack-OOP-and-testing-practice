@@ -7,12 +7,12 @@ class Card:
 
 	# first 2 entries are None for convenience, so index 2 is 2, 3 is 3 etc
 	RANK = [None, None, "2", "3", "4", "5", "6", "7", 
-			"8", "9", "10", "Jack", "Queen", "King"]
+			"8", "9", "10", "Jack", "Queen", "King", "Ace"]
 
 
 	def __init__(self, rank, suit):
 		# checks that card being created is valid
-		if (rank >= 2 and rank <= 13) and (suit <= 3 and suit >= 0):
+		if (rank >= 2 and rank <= 14) and (suit <= 3 and suit >= 0):
 			self.rank = rank
 			self.suit = suit
 		else:
