@@ -1,5 +1,6 @@
 from Card import Card
 from CardCollections import *
+from Players import *
 import unittest
 from UserDefinedExceptions import *
 import logging
@@ -142,6 +143,7 @@ class DeckTest(unittest.TestCase):
 	def setUp(self):
 		self.deck = Deck("Deck")
 
+	@logger
 	def test_populate(self):
 		self.assertEqual(self.deck.get_size(), 52)
 		for i in range(self.deck.get_size()):
@@ -154,12 +156,22 @@ class HandTest(unittest.TestCase):
 	 def setUp(self):
 	 	self.hand = Hand("Hand")
 
+	 @logger
 	 def test_display(self):
 	 	deck = Deck("Deck")
 	 	deck.deal(self.hand, 3)
 	 	self.hand.display()
 
+class PlayerTest(unittest.TestCase):
 
+	 def setUp(self):
+	 	self.player = Player("player")
+	 	self.deck = Deck("deck")
+	 	self.deck.deal(self.player.hand, 2)
+
+	 @logger
+	 def test_get_score(self):
+	 	self.assertEqual(20, self.player.get_score())
 
 
 
