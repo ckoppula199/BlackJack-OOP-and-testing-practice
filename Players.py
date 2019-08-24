@@ -56,18 +56,56 @@ class Player:
 	
 
 class User(Player):
+	def __init__(self, name):
+		super().__init__(name)
+
+	def user_turn(self):
+		print("Your score is {}".format(self.get_score()))
+		print(self.hand)
+		#DEBUG
+		print("1) Draw card")
+		print("2) Stick")
+		self.get_user_input()
+
+	def get_user_input(self):
+		while True:
+			choice = input(">>: ")
+			if self.validate_input(choice):
+				break
+			print("Enter 1 or 2")
+
+	def validate_input(self, choice):
+		if choice == "1" or choice == "2":
+			return True
+		else:
+			return False
+
+	def proccess_choice(self, choice):
+		if choice == 1:
+			bust = self.draw()
+			if bust:
+				return True
+			return False
+		else:
+			self.stick = True
+			return False
 	
 
 class Computer(Player):
-	pass
+	
+	def __init__(self, name):
+		super().__init__(name)
 
+	def computer_turn(self):
+
+
+#DEBUG
 if __name__ == "__main__":
-	player = Player("Chak")
+	player = User("Chak")
 	deck = Deck("testdeck")
 	deck.shuffle()
 	deck.deal(player.hand, 2)
 	print(player.get_hand_size())
 	print(player.hand)
-	player.draw(deck)
-	print(player.hand)
+	player.user_turn()
 
