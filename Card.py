@@ -24,6 +24,8 @@ class Card:
 
 	def get_card_value(self):
 		if self.rank > 10: #jack, queen and king all worth 10
+			if self.rank == 14:
+				return 11
 			return 10
 		else:
 			return self.rank

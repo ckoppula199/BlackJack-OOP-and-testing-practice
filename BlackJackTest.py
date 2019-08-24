@@ -60,6 +60,8 @@ class CardTest(unittest.TestCase):
 	def test_get_card_value(self):
 		self.assertEqual(self.card.get_card_value(), 8)
 		self.assertEqual(self.card2.get_card_value(), 10)
+		ace = Card(14, 3)
+		self.assertEqual(ace.get_card_value(), 11)
 
 
 class CardCollectionTest(unittest.TestCase):
@@ -171,7 +173,7 @@ class PlayerTest(unittest.TestCase):
 
 	 @logger
 	 def test_get_score(self):
-	 	self.assertEqual(20, self.player.get_score())
+	 	self.assertEqual(21, self.player.get_score())
 
 	 @logger
 	 def test_get_hand_size(self):
