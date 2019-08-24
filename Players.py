@@ -5,6 +5,7 @@ class Player:
 	def __init__(self, name):
 		self.name = name
 		self.hand = Hand(self.name)
+		self.stick = False
 
 	def get_score(self):
 		score = 0
@@ -55,7 +56,7 @@ class Player:
 	
 
 class User(Player):
-	pass
+	
 
 class Computer(Player):
 	pass

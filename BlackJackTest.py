@@ -173,6 +173,28 @@ class PlayerTest(unittest.TestCase):
 	 def test_get_score(self):
 	 	self.assertEqual(20, self.player.get_score())
 
+	 @logger
+	 def test_get_hand_size(self):
+	 	self.assertEqual(2, self.player.get_hand_size())
+
+	 @logger
+	 def test_draw(self):
+	 	self.assertTrue(self.player.draw(self.deck))
+	 	self.player.hand.remove_card()
+	 	self.player.hand.remove_card()
+	 	self.assertFalse(self.player.draw(self.deck))
+
+	 @logger
+	 def test_check_if_bust(self):
+	 	self.player.hand.remove_card()
+	 	self.player.hand.remove_card()
+	 	self.assertFalse(self.player.check_if_bust())
+	 	self.player.draw(self.deck)
+	 	self.player.draw(self.deck)
+	 	self.player.draw(self.deck)
+	 	self.player.draw(self.deck)
+	 	self.assertTrue(self.player.check_if_bust())
+
 
 
 
