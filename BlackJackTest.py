@@ -197,6 +197,45 @@ class PlayerTest(unittest.TestCase):
 	 	self.player.draw(self.deck)
 	 	self.assertTrue(self.player.check_if_bust())
 
+class UserTest(unittest.TestCase):
+	
+	def setUp(self):
+		self.ace = Card(14, 3)
+		self.five = Card(5, 3)
+		self.king = Card(13, 2)
+		self.user = User("User")
+		self.deck = Deck("DrawPIle")
+
+	
+
+class ComputerTest(unittest.TestCase):
+
+	def setUp(self):
+		self.ace = Card(14, 3)
+		self.five = Card(5, 3)
+		self.king = Card(13, 2)
+		self.computer = Computer("Computer")
+		self.deck = Deck("DrawPile")
+
+	@logger
+	def test_computer_turn_lt16(self):
+		self.computer.hand.add_card(self.ace)
+		self.computer.hand.add_card(self.king)
+		self.assertFalse(self.computer.computer_turn(self.deck))
+		self.assertTrue(self.computer.stick)
+
+	@logger
+	def test_computer_turn_gt16(self):
+		self.computer.hand.add_card(self.five)
+		self.assertFalse(self.computer.computer_turn(self.deck))
+		self.assertFalse(self.computer.stick)
+
+	@logger
+	def test_computer_turn_goes_bust(self):
+		self.computer.hand.add_card(self.ace)
+		self.computer.hand.add_card(self.five)
+		self.assertTrue(self.computer.computer_turn(self.deck))
+
 
 
 

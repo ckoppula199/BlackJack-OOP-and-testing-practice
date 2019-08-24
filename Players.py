@@ -59,20 +59,23 @@ class User(Player):
 	def __init__(self, name):
 		super().__init__(name)
 
-	def user_turn(self):
+	def user_turn(self, drawpile):
 		print("Your score is {}".format(self.get_score()))
 		print(self.hand)
 		#DEBUG
 		print("1) Draw card")
 		print("2) Stick")
-		self.get_user_input()
+		choice = self.get_user_input()
+		self.proccess_choice(choice, drawpile)
 
 	def get_user_input(self):
+		choice = ""
 		while True:
 			choice = input(">>: ")
 			if self.validate_input(choice):
 				break
 			print("Enter 1 or 2")
+		return choice
 
 	def validate_input(self, choice):
 		if choice == "1" or choice == "2":
@@ -80,9 +83,9 @@ class User(Player):
 		else:
 			return False
 
-	def proccess_choice(self, choice):
+	def proccess_choice(self, choice, drawpile):
 		if choice == 1:
-			bust = self.draw()
+			bust = self.draw(drawpile)
 			if bust:
 				return True
 			return False
@@ -96,7 +99,12 @@ class Computer(Player):
 	def __init__(self, name):
 		super().__init__(name)
 
-	def computer_turn(self):
+	def computer_turn(self, drawpile):
+		if self.get_score() > 16:
+			self.stick = True
+			return False
+		else:
+			return self.draw(drawpile)
 
 
 #DEBUG
