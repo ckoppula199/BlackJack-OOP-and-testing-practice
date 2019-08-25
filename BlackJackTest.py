@@ -201,7 +201,6 @@ class UserTest(unittest.TestCase):
 	
 	def setUp(self):
 		self.ace = Card(14, 3)
-		self.five = Card(5, 3)
 		self.king = Card(13, 2)
 		self.user = User("User")
 		self.deck = Deck("DrawPIle")

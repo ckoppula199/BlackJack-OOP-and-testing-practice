@@ -22,33 +22,15 @@ class Player:
 			return True
 		return False
 
-	def call(self, user, computer):
-		if user.get_score() == computer.get_score():
-			print("Its a draw")
-			self.display_helper(user, computer)
-		elif user.get_score() > computer.get_score():	
-			print("{} wins!".format(user.name))
-			self.display_helper(user, computer)
-		else:
-			print("{} wins!".format(computer.name))
-			self.display_helper(user, computer)
-
 	def check_if_bust(self):
 		if self.get_score() > 21:
 			return True
 		else:
 			return False
 
-	def display_helper(self, user, computer):
-		print("-----------------------------------")
-		user.display_data()
-		print("-----------------------------------")
-		computer.display_data()
-		print("-----------------------------------")
-
 	def display_data(self):
-		print("{} has score of ")
-		print("{}'s Hand:")
+		print("{} has score of {}".format(self.name, self.get_score()))
+		print("{}'s Hand:".format(self.name))
 		print()
 		for i in range(self.get_hand_size()):
 			print(self.hand.cards[i])
@@ -62,11 +44,10 @@ class User(Player):
 	def user_turn(self, drawpile):
 		print("Your score is {}".format(self.get_score()))
 		print(self.hand)
-		#DEBUG
 		print("1) Draw card")
 		print("2) Stick")
 		choice = self.get_user_input()
-		self.process_choice(choice, drawpile)
+		return self.process_choice(choice, drawpile)
 
 	def get_user_input(self):
 		choice = ""
@@ -85,10 +66,7 @@ class User(Player):
 
 	def process_choice(self, choice, drawpile):
 		if choice == "1":
-			bust = self.draw(drawpile)
-			if bust:
-				return True
-			return False
+			return self.draw(drawpile)
 		else:
 			self.stick = True
 			return False
