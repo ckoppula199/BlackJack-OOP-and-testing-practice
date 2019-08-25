@@ -2,6 +2,7 @@ from Card import Card
 from CardCollections import *
 from Players import *
 import unittest
+from unittest.mock import patch
 from UserDefinedExceptions import *
 import logging
 
@@ -19,7 +20,6 @@ def logger(test):
 		except AssertionError:
 			logging.info(" {} DID NOT RUN SUCCESSFULY\n".format(test.__name__))
 			raise AssertionError
-			
 		
 	return wrapper
 
@@ -206,7 +206,41 @@ class UserTest(unittest.TestCase):
 		self.user = User("User")
 		self.deck = Deck("DrawPIle")
 
-	
+	@logger
+	def test_validate_input_valid(self):
+		self.assertTrue(self.user.validate_input("1"))
+		self.assertTrue(self.user.validate_input("2"))
+
+	@logger
+	def test_validate_input_invalid(self):
+		self.assertFalse(self.user.validate_input(1))
+		self.assertFalse(self.user.validate_input(2))
+		self.assertFalse(self.user.validate_input("one"))
+
+	@logger
+	def test_process_choice_2(self):
+		self.assertFalse(self.user.process_choice("2", self.deck))
+
+	@logger
+	def test_process_choice_1_not_bust(self):
+		self.assertFalse(self.user.process_choice("1", self.deck))
+
+	@logger
+	def test_process_choice_1_bust(self):
+		self.user.hand.add_card(self.ace)
+		self.user.hand.add_card(self.king)
+		self.assertTrue(self.user.process_choice("1", self.deck))
+
+	@logger
+	def test_get_user_input_1(self):
+		with patch('builtins.input', return_value="1"):
+			self.assertEqual("1", self.user.get_user_input())
+
+	@logger
+	def test_get_user_input_2(self):
+		with patch('builtins.input', return_value="2"):
+			self.assertEqual("2", self.user.get_user_input())
+
 
 class ComputerTest(unittest.TestCase):
 

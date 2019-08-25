@@ -26,7 +26,7 @@ class Player:
 		if user.get_score() == computer.get_score():
 			print("Its a draw")
 			self.display_helper(user, computer)
-		elif user.get_score() > computer.get_score():
+		elif user.get_score() > computer.get_score():	
 			print("{} wins!".format(user.name))
 			self.display_helper(user, computer)
 		else:
@@ -66,7 +66,7 @@ class User(Player):
 		print("1) Draw card")
 		print("2) Stick")
 		choice = self.get_user_input()
-		self.proccess_choice(choice, drawpile)
+		self.process_choice(choice, drawpile)
 
 	def get_user_input(self):
 		choice = ""
@@ -83,8 +83,8 @@ class User(Player):
 		else:
 			return False
 
-	def proccess_choice(self, choice, drawpile):
-		if choice == 1:
+	def process_choice(self, choice, drawpile):
+		if choice == "1":
 			bust = self.draw(drawpile)
 			if bust:
 				return True
@@ -115,5 +115,5 @@ if __name__ == "__main__":
 	deck.deal(player.hand, 2)
 	print(player.get_hand_size())
 	print(player.hand)
-	player.user_turn()
+	player.user_turn(deck)
 
