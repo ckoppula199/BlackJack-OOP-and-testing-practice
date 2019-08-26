@@ -5,6 +5,7 @@ import unittest
 from unittest.mock import patch
 from UserDefinedExceptions import *
 import logging
+from BlackJack import Blackjack
 
 # decorator to wrap around tests that stores results and arguments and name of each test run in a text file
 def logger(test):
@@ -269,6 +270,18 @@ class ComputerTest(unittest.TestCase):
 		self.computer.hand.add_card(self.five)
 		self.assertTrue(self.computer.computer_turn(self.deck))
 
+#methods of this class mainly just wrap methods of previous classes
+class BlackjackTest(unittest.TestCase):
+
+	def setUp(self):
+		self.blackjack = Blackjack()
+
+	@logger
+	def test_check_whos_bsut(self):
+		self.assertTrue(self.blackjack.check_whos_bust(True, True))
+		self.assertTrue(self.blackjack.check_whos_bust(False, True))
+		self.assertTrue(self.blackjack.check_whos_bust(True, False))
+		self.assertFalse(self.blackjack.check_whos_bust(False, False))
 
 
 
