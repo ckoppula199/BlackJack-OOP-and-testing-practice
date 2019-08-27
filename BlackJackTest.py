@@ -7,6 +7,8 @@ from UserDefinedExceptions import *
 import logging
 from BlackJack import Blackjack
 
+open("Test-Logs.txt", "w").close()
+
 # decorator to wrap around tests that stores results and arguments and name of each test run in a text file
 def logger(test):
 	logging.basicConfig(filename="Test-Logs.txt", level=logging.INFO)
